@@ -7,5 +7,5 @@
 		"types": ["jest", "node"],
 		"noUncheckedIndexedAccess": false
 	},
-	"include": ["src/**/*.ts", "**/*.test.ts", "__mocks__/**/*.ts"]
+	"include": ["src/**/*.ts", "tests/**/*.ts"]
 }

@@ -1,6 +1,6 @@
 import { App, Notice, TFile } from 'obsidian';
-import TaskCleanerPlugin from './src/main';
-import { DEFAULT_SETTINGS } from './src/settings';
+import TaskCleanerPlugin from '../src/main';
+import { DEFAULT_SETTINGS } from '../src/settings';
 
 // ---------------------------------------------------------------------------
 // Helpers
