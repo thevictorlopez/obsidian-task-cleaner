@@ -1,10 +1,10 @@
-import { Notice, TFile, Vault } from 'obsidian';
-import type { TaskCleanerSettings } from './settings';
+import { Notice, TFile, Vault } from "obsidian";
+import type { TaskCleanerSettings } from "./settings";
 
 const DONE_TASK_RE = /^(\s*)[-*+] \[[xX]\] .+/;
 
 function pad2(n: number): string {
-	return n.toString().padStart(2, '0');
+	return n.toString().padStart(2, "0");
 }
 
 function formatDateTime(d: Date): string {
@@ -22,7 +22,7 @@ export async function cleanDoneTasks(
 	settings: TaskCleanerSettings,
 ): Promise<void> {
 	if (settings.paths.length === 0) {
-		new Notice('No done tasks found');
+		new Notice("No done tasks found");
 		return;
 	}
 
@@ -42,7 +42,7 @@ export async function cleanDoneTasks(
 
 	for (const file of matchingFiles) {
 		const content = await vault.read(file);
-		const lines = content.split('\n');
+		const lines = content.split("\n");
 
 		const doneTasks: string[] = [];
 		const remainingLines: string[] = [];
@@ -60,7 +60,7 @@ export async function cleanDoneTasks(
 		totalTasksRemoved += doneTasks.length;
 		filesWithTasks += 1;
 
-		await vault.modify(file, remainingLines.join('\n'));
+		await vault.modify(file, remainingLines.join("\n"));
 
 		archiveEntry += `\n### [[${file.path}]]\n`;
 		for (const task of doneTasks) {
@@ -69,21 +69,23 @@ export async function cleanDoneTasks(
 	}
 
 	if (totalTasksRemoved === 0) {
-		new Notice('No done tasks found');
+		new Notice("No done tasks found");
 		return;
 	}
 
-	const trashExists = vault.getAbstractFileByPath('.trash');
+	const trashExists = vault.getAbstractFileByPath(".trash");
 	if (!trashExists) {
-		await vault.createFolder('.trash');
+		await vault.createFolder(".trash");
 	}
 
 	const archiveFile = vault.getAbstractFileByPath(archivePath);
-	if (archiveFile) {
-		await vault.append(archiveFile as TFile, archiveEntry);
+	if (archiveFile instanceof TFile) {
+		await vault.append(archiveFile, archiveEntry);
 	} else {
 		await vault.create(archivePath, archiveEntry.trimStart());
 	}
 
-	new Notice(`Cleaned ${totalTasksRemoved} tasks from ${filesWithTasks} files`);
+	new Notice(
+		`Cleaned ${totalTasksRemoved} tasks from ${filesWithTasks} files`,
+	);
 }

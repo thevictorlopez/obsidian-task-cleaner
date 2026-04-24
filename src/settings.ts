@@ -20,9 +20,8 @@ export class TaskCleanerSettingTab extends PluginSettingTab {
 	display(): void {
 		const { containerEl } = this;
 		containerEl.empty();
-		containerEl.createEl('h2', { text: 'Task Cleaner' });
 		containerEl.createEl('p', {
-			text: 'Paths are vault-relative (e.g. notes/daily). Only files under these paths will be scanned.',
+			text: 'Paths are vault-relative (e.g. Notes/daily). Only files under these paths will be scanned.',
 		});
 
 		for (const path of this.plugin.settings.paths) {
