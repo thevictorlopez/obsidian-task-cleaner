@@ -3,6 +3,7 @@
 	"version": "1.0.0",
 	"type": "module",
 	"main": "main.js",
+	"author": "Víctor López García",
 	"scripts": {
 		"dev": "node esbuild.config.mjs",
 		"build": "tsc -noEmit -skipLibCheck && node esbuild.config.mjs production",
