@@ -1,0 +1,9 @@
+{
+  "id": "task-cleaner",
+  "name": "Task Cleaner",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Delete done tasks from configured paths with soft-delete to .trash",
+  "author": "V",
+  "isDesktopOnly": false
+}
